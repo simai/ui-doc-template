@@ -8,9 +8,14 @@ section: content
 # Test {#test}
 
 <div class="bg-primary-container">
-    <h2>HTML-вставка</h2>
-    <p>Этот блок написан на HTML.</p>
+    <h2 class="title-4">HTML-вставка</h2>
+    <p class="color-on-surface">Этот блок написан на HTML.</p>
+    <p class="text-small color-on-primary">маленький текст</p>
 </div>
+
+<div class="aspect-16x9 w-full">16x9</div>
+
+<code>console.log("Hello, world!");</code>
 
 # Getting Started {#getting-started}
 
