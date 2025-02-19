@@ -31,9 +31,6 @@
             <!-- Insert analytics code here -->
         @endif
 
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/simai/ui-core@main/distr/core.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/simai/ui-utilities@main/distr/full/utility.full.min.css" />
-
         <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,300i,400,400i,700,700i,800,800i" rel="stylesheet">
         <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}">
 

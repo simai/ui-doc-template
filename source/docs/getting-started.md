@@ -5,18 +5,6 @@ extends: _layouts.documentation
 section: content
 ---
 
-# Test {#test}
-
-<div class="bg-primary-container">
-    <h2 class="title-4">HTML-вставка</h2>
-    <p class="color-on-surface">Этот блок написан на HTML.</p>
-    <p class="text-small color-on-primary">маленький текст</p>
-</div>
-
-<div class="aspect-16x9 w-full">16x9</div>
-
-<code>console.log("Hello, world!");</code>
-
 # Getting Started {#getting-started}
 
 This is a starter template for creating a beautiful, customizable documentation site for your project with minimal effort. You’ll only have to change a few settings and you’re ready to go.
