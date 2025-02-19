@@ -22,7 +22,7 @@ jobs:
         port: ${{ vars.SSH_PORT }}
         script: |
           # Переход в директорию проекта
-          cd /var/www/dev/data/git/ui-doc-jigsaw
+          cd /var/www/dev/data/git/ui-doc
           
           # Обновление кода из ветки main
           git pull origin main
