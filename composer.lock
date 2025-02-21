@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9ac32eaab6c916e035319bcca11603c0",
+    "content-hash": "f1d89b3c5534a86f3c74a0350c1b3fa1",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -4322,6 +4322,65 @@
             "time": "2024-06-27T19:18:14+00:00"
         },
         {
+            "name": "tightenco/jigsaw-docs-template",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tighten/jigsaw-docs-template.git",
+                "reference": "6dc62b4e3afe5ffa9cf9d4dd5dd97ecc6e8f3d7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tighten/jigsaw-docs-template/zipball/6dc62b4e3afe5ffa9cf9d4dd5dd97ecc6e8f3d7e",
+                "reference": "6dc62b4e3afe5ffa9cf9d4dd5dd97ecc6e8f3d7e",
+                "shasum": ""
+            },
+            "require": {
+                "samdark/sitemap": "^2.2.1",
+                "tightenco/jigsaw": "^1.3.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "App\\Listeners\\": "listeners/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Terrell",
+                    "email": "anthony@tighten.co"
+                },
+                {
+                    "name": "Keith Damiani",
+                    "email": "keith@tighten.co"
+                },
+                {
+                    "name": "Matt Stauffer",
+                    "email": "matt@tighten.co"
+                }
+            ],
+            "description": "Documentation starter template for Jigsaw static site generator by Tighten",
+            "keywords": [
+                "docs",
+                "documentation",
+                "generator",
+                "jigsaw",
+                "site",
+                "starter",
+                "static",
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/tighten/jigsaw-docs-template/issues",
+                "source": "https://github.com/tighten/jigsaw-docs-template/tree/v1.2.0"
+            },
+            "time": "2024-07-25T20:40:20+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.1",
             "source": {
@@ -4483,10 +4542,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
-    "platform-dev": {},
+    "platform": [],
+    "platform-dev": [],
     "plugin-api-version": "2.6.0"
 }
