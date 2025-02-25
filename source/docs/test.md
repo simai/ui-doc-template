@@ -31,9 +31,9 @@ section: content
     }
 </style>
 <!-- source/404.blade.php -->
-<link rel="stylesheet" href="/assets/sf5/core/css/core.css">
+<!--<link rel="stylesheet" href="/assets/sf5/core/css/core.css">
 <link rel="stylesheet" href="/assets/sf5/core/css/utility.full.css">
-
+-s->
 <!--testing alert-->
 <link rel="stylesheet" href="/assets/sf5/component/icons/css/icons.css">
 <link rel="stylesheet" href="/assets/sf5/component/alerts/css/alerts.css">
