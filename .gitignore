@@ -11,3 +11,4 @@ webpack.mix.js
 composer.lock
 .env
 npm-debug.log
+/package-lock.json
