@@ -7,7 +7,7 @@
 1. Клонируйте репозиторий:
 
 ```bash
-git clone --recurse-submodules <repo>
+git clone --recurse-submodules git@github.com:simai/ui-doc-template.git
 cd <repo>
 ```
 
