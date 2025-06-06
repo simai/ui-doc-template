@@ -1,6 +1,6 @@
 <?php
     return [
-        'title' => '',
+        'title' => 'Основы',
         'menu' => [
             'algolia-docsearch' => 'Documentation Search',
             'custom-404-page' => 'Custom 404 Page',

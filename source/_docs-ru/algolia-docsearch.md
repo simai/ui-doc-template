@@ -5,7 +5,7 @@ extends: _core._layouts.documentation
 section: content
 ---
 
-# Algolia DocSearch {#algolia-docsearch}
+# Algolia DocSearch 
 
 This starter template includes support for [DocSearch](https://community.algolia.com/docsearch/), a documentation indexing and search tool provided by Algolia for free. To configure this tool, you’ll need to sign up with Algolia and set your API Key and index name in `config.php`. Algolia will then crawl your documentation regularly, and index all your content.
 
@@ -27,7 +27,7 @@ To help Algolia index your pages correctly, it's good practice to add a unique `
 
 ---
 
-## Adding Custom Styles {#algolia-adding-custom-styles}
+## Adding Custom Styles 
 
 If you'd like to customize the styling of the search results, Algolia exposes custom CSS classes that you can modify:
 
