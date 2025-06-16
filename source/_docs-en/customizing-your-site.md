@@ -4,7 +4,7 @@ description: Customizing your Jigsaw docs site
 extends: _core._layouts.documentation
 section: content
 ---
-# Customizing Your Site {#customizing}
+# Customizing Your Site
 
 ## Styles
 
@@ -31,7 +31,7 @@ This starter template comes pre-loaded with [Tailwind CSS](https://tailwindcss.c
 
 ---
 
-## Typography Styles {#customizing-typography}
+## Typography Styles
 
 Here’s a quick preview of what some of the basic type styles will look like in this starter template:
 

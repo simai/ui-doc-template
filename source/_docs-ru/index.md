@@ -15,6 +15,10 @@ description: Добро пожаловать
 
 Например:
 
+<div markdown="1" class="list-default">
+
 - [Установка](/source/docs/ru/getting-started.md)
 - [Навигация](/source/docs/ru/navigation.md)
 - [Мой компонент](/docs/my-component)
+
+</div>
