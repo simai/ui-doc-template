@@ -9,11 +9,14 @@ description: Добро пожаловать
 
 Это главная страница, но она использует тот же layout, что и документация.
 
-:example
-Текст примера
-:endexample
+
+
 
 Пример отображения кода:
+
+!example
+Пример компонента example с парсером markdown
+!endexample
 
 ```html
 <div class="test">
@@ -32,6 +35,9 @@ description: Добро пожаловать
     <p>Вы можете увидеть это в действии на демо:</p>
 </div>
 ```
+!example
+Пример компонента example с парсером markdown
+!endexample
 
 ```js
 import {ComponentObserver} from "../../../core/js/ComponentObserver";
