@@ -11,9 +11,9 @@ class ExampleTag implements CustomTagInterface
         return '/!example\s*\n([\s\S]*?)\n!endexample/';
     }
 
-    public function getTemplate(string $innerHtml): string
+    public function getTemplate(string $template): string
     {
-        return "<div class=\"example\">{$innerHtml}</div>";
+        return "<div class=\"example overflow-hidden radius-1/2 overflow-x-auto\">{$template}</div>";
     }
 
 }
