@@ -7,7 +7,8 @@ description: Welcome
 
 # Installation
 
-Jigsaw requires PHP 8.1+ and Composer. Before installing Jigsaw, make sure you have [Composer](https://getcomposer.org/) installed on your machine.
+Jigsaw requires PHP 8.1+ and Composer. Before installing Jigsaw, make sure you have [Composer](https://getcomposer.org/)
+installed on your machine.
 
 ## Installing Jigsaw
 
@@ -65,37 +66,25 @@ To serve your site locally and preview it in your browser, use:
 
 By default, your site will be available at [http://localhost:8000](http://localhost:8000).
 
-> **Note:** If you have installed Jigsaw globally, you can use `jigsaw build` and `jigsaw serve` instead of the full path.
+> **Note:** If you have installed Jigsaw globally, you can use `jigsaw build` and `jigsaw serve` instead of the full
+> path.
+
 ## Directory structure
 
-source/
-├── _assets/
-│     ├── js/
-│     │     └── main.js
-│     └── sass/
-│           └── main.scss
-├── _layouts/
-│     └── master.blade.php
-├── assets/
-├── build/
-│     ├── js/
-│     │     └── main.js
-│     ├── sass/
-│     │     └── main.css
-│     ├── mix-manifest.json
-│     └── images/
-│           └── jigsaw.png
-├── index.blade.php
-├── tasks/
-├── vendor/
-├── bootstrap.php
-├── composer.json
-├── composer.lock
-├── config.php
-├── package.json
-└── webpack.mix.js
+<div class="files"><div class="folder folder--open">source
+        <div class="folder folder--open">_assets
+            <div class="folder folder--open">js
+                <div class="file">main.js</div></div> <div class="folder folder--open">sass
+                <div class="file">main.scss</div></div></div> <div class="folder folder--open">_layouts
+            <div class="file">master.blade.php</div></div> <div class="folder folder--open">assets
+            <div class="folder folder--open">build
+                <div class="folder folder--open">js
+                    <div class="file">main.js</div></div> <div class="folder folder--open">sass
+                    <div class="file">main.css</div></div> <div class="file">mix-manifest.json</div></div> <div class="folder folder--open">images
+                <div class="file">jigsaw.png</div></div></div> <div class="file">index.blade.php</div></div> <div class="folder">tasks</div> <div class="folder">vendor</div> <div class="file">bootstrap.php</div> <div class="file">composer.json</div> <div class="file">composer.lock</div> <div class="file">config.php</div> <div class="file">package.json</div> <div class="file">webpack.mix.js</div></div>
 
 ## Next Steps
 
-Now that your site is up and running, check out the rest of the [Jigsaw documentation](https://jigsaw.tighten.com/docs/).
+Now that your site is up and running, check out the rest of
+the [Jigsaw documentation](https://jigsaw.tighten.com/docs/).
 
