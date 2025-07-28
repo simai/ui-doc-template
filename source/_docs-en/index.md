@@ -1,8 +1,8 @@
 ---
 extends: _core._layouts.documentation
 section: content
-title: Welcome
-description: Welcome
+title: Installation
+description: Installation
 ---
 
 # Installation
@@ -10,81 +10,124 @@ description: Welcome
 Jigsaw requires PHP 8.1+ and Composer. Before installing Jigsaw, make sure you have [Composer](https://getcomposer.org/)
 installed on your machine.
 
-## Installing Jigsaw
+## Clone the repository with submodules:
 
-You can install Jigsaw globally as a Composer dependency, or on a per-project basis.
-
-### Installing Globally
-
-To install Jigsaw globally on your system, run:
+This will copy the project to your local machine and include all core submodules:
 
 ```bash
-composer global require tightenco/jigsaw
+git clone --recurse-submodules git@github.com:simai/ui-doc-template.git
 ```
+```bash
+cd <repo>
+```
+### Initialize submodules (if you didn't use --recurse-submodules)
 
-Once installed, the `jigsaw` command will be available globally in your terminal.
-
-### Installing Per-Project
-
-To install Jigsaw as a dependency of a specific project, run the following command in your project directory:
+This command fetches all submodules required by the project:
 
 ```bash
-composer require tightenco/jigsaw
+git submodule update --init --remote
 ```
 
-This will add Jigsaw to your project's `composer.json` file.
+### Install dependencies:
 
-## Creating a New Jigsaw Site
-
-After installing Jigsaw, you can create a new site using the `init` command. In your terminal, run:
+Install all required Node.js and PHP packages for development and building:
 
 ```bash
-jigsaw init blog
+yarn install
 ```
-
-This will create a new directory called `blog` with a fresh Jigsaw installation.
-
-## Building and Previewing Your Site
-
-Navigate into your new site’s directory:
 
 ```bash
-cd blog
+composer install
 ```
 
-To build your site, run:
+## Run in development mode:
+
+Launch the development server and watches for changes to auto-build your docs:
 
 ```bash
-./vendor/bin/jigsaw build
+yarn run watch
 ```
 
-To serve your site locally and preview it in your browser, use:
-
-```bash
-./vendor/bin/jigsaw serve
-```
-
-By default, your site will be available at [http://localhost:8000](http://localhost:8000).
-
-> **Note:** If you have installed Jigsaw globally, you can use `jigsaw build` and `jigsaw serve` instead of the full
-> path.
+The project will be rebuilt automatically whenever you modify the source files.
 
 ## Directory structure
 
-<div class="files"><div class="folder folder--open">source
-        <div class="folder folder--open">_assets
-            <div class="folder folder--open">js
-                <div class="file">main.js</div></div> <div class="folder folder--open">sass
-                <div class="file">main.scss</div></div></div> <div class="folder folder--open">_layouts
-            <div class="file">master.blade.php</div></div> <div class="folder folder--open">assets
-            <div class="folder folder--open">build
-                <div class="folder folder--open">js
-                    <div class="file">main.js</div></div> <div class="folder folder--open">sass
-                    <div class="file">main.css</div></div> <div class="file">mix-manifest.json</div></div> <div class="folder folder--open">images
-                <div class="file">jigsaw.png</div></div></div> <div class="file">index.blade.php</div></div> <div class="folder">tasks</div> <div class="folder">vendor</div> <div class="file">bootstrap.php</div> <div class="file">composer.json</div> <div class="file">composer.lock</div> <div class="file">config.php</div> <div class="file">package.json</div> <div class="file">webpack.mix.js</div></div>
+A brief overview of the main directories and files:
 
-## Next Steps
+<div class="files">
+    <div class="folder">build_env</div>
+    <div class="folder folder--open">source
+        <div class="folder folder--open">_core
+            <div class="folder folder--open">_assets
+                <div class="folder">css</div>
+                <div class="folder">js</div>
+                <div class="folder">fonts</div>
+                <div class="folder">img</div>
+            </div>
+            <div class="folder folder--open">_components
+            <div class="file">language.blade.php</div>
+            <div class="file">more.blade.php</div>
+            <div class="file">right-top-menu.blade.php</div>
+            <div class="file">settings.blade.php</div>
+            </div>
+            <div class="folder folder--open">_layouts
+                <div class="file">core.blade.php</div>
+                <div class="file">documentation.blade.php</div>
+                <div class="file">head.blade.php</div>
+                <div class="file">header.blade.php</div>
+                <div class="file">logo.blade.php</div>
+                <div class="file">main.blade.php</div>
+                <div class="file">master.blade.php</div>
+            </div>
+            <div class="folder folder--open">_nav
+                <div class="file">bottom-nav.blade.php</div>
+                <div class="file">breadcrumbs.blade.php</div>
+                <div class="file">menu.blade.php</div>
+                <div class="file">menu-toggle.blade.php</div>
+                <div class="file">search-input.blade.php</div>
+                <div class="file">side-menu.blade.php</div>
+                <div class="file">top-menu.blade.php</div>
+            </div>
+            <div class="folder folder--open">helpers
+                <div class="file">Configurator.php</div>
+                <div class="file">CustomTagInterface.php</div>
+                <div class="file">Parser.php</div>
+                <div class="file">TagRegistry.php</div>
+            </div>
+            <div class="file">.gitignore</div>
+            <div class="file">404.blade.php</div>
+            <div class="file">bootstrap.php</div>
+            <div class="file">collections.php</div>
+            <div class="file">composer.json</div>
+            <div class="file">config.php</div>
+            <div class="file">copy-template-configs.js</div>
+            <div class="file">eslint.config.js</div>
+            <div class="file">favicon.ico</div>
+            <div class="file">index.md</div>
+            <div class="file">navigation.php</div>
+            <div class="file">package.json</div>
+            <div class="file">webpack.mix.js</div>
+        </div>
+        <div class="folder folder--open">_docs-(lang)
+            <div class="folder">section-name</div>
+            <div class="folder">section-name</div>
+            <div class="folder">section-name</div>
+            <div class="folder">section-name</div>
+            <div class="file">.lang.php</div>
+            <div class="file">.settings.php</div>
+            <div class="file">index.md</div>
+            <div class="file">page.md</div>
+        </div>
+        <div class="file">index.blade.md</div>
+    </div>
+    <div class="folder folder--open">tags
+        <div class="file">ExampleTag.php</div>
+    </div>
+    <div class="folder">vendor</div>
+    <div class="file">.gitignore</div>
+    <div class="file">.gitmodules</div>
+    <div class="file">eslint.config.js</div>
+    <div class="file">package.json</div>
+</div>
 
-Now that your site is up and running, check out the rest of
-the [Jigsaw documentation](https://jigsaw.tighten.com/docs/).
 

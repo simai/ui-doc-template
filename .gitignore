@@ -13,3 +13,5 @@ composer.lock
 .env
 npm-debug.log
 /package-lock.json
+/source/404.blade.php
+/source/favicon.ico
