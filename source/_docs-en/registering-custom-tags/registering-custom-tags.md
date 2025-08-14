@@ -58,7 +58,8 @@ The tag class must define two methods:
 
 - `getPattern()`    Returns a regex pattern to match the custom tag in raw Markdown.
 - `getTemplate()`    Receives matched content and returns a rendered HTML snippet.
-  !endlinks
+  
+!endlinks
 
 ## How it works
 

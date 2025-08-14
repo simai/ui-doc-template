@@ -18,4 +18,8 @@
         'reduced' => 'Reduced',
         'default' => 'Default',
         'increased' => 'Increased',
+        'edit article' => 'Edit article',
+        'report a bug' => 'Report a bug',
+        'previous' => 'Previous',
+        'next' => 'Next',
     ];

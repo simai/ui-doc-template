@@ -36,7 +36,8 @@ which has several attributes:
 - `$pagination->currentPage` contains the page number of the current page
 - `$pagination->totalPages` contains the total number of pages
 - `$pagination->pages` contains an array of paths to each page
-  !endlinks
+  
+!endlinks
 
 > Note that the `pages` are indexed by their page number, i.e. they are 1-based. So you can refer to the paths of a page
 > by
@@ -48,7 +49,8 @@ which has several attributes:
 - `$pagination->last` contains the path to the last page
 - `$pagination->next` contains the path to the next page
 - `$pagination->previous` contains the path to the previous page
-  !endlinks
+
+!endlinks
 
 Using these `$pagination` attributes, you can build a set of pagination buttons and links:
 

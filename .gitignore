@@ -11,6 +11,7 @@ tailwind.config.js
 webpack.mix.js
 composer.lock
 .env
+/translate.config.php
 npm-debug.log
 /package-lock.json
 /source/404.blade.php

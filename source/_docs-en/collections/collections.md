@@ -186,7 +186,8 @@ have access to a few additional functions:
   order
 - `getFirst()` returns the first item of a collection (as does the Laravel collection method `first()`)
 - `getLast()` returns the last item of a collection (as does the Laravel collection method `last()`)
-  !endlinks
+
+!endlinks
 
 > _layouts/post.blade.php
 

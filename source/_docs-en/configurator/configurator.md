@@ -54,7 +54,7 @@ This is done during the `beforeBuild` phase in `bootstrap.php`.
 
 !links
 
-- public array `$locales`    List of locale codes, e.g., `['en', 'ru']`
+- public array `$locales` List of locale codes, e.g., `['en', 'ru']`
 
 - public string `$locale` Currently active locale (default: 'ru')
 

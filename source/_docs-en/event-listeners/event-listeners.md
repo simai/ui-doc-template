@@ -23,7 +23,8 @@ processed.
   directory.*** This allows you to obtain a list of the output file paths (to use, for example, when creating a
   `sitemap.xml`
   file), programmatically create output files, or take care of any other post-processing tasks.
-  !endlinks
+
+!endlinks
 
 ---
 

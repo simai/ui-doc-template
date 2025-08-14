@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+    use App\Helpers\Translate\Translate;
+
+    require __DIR__ . '/../vendor/autoload.php';
+
+    $translate = new Translate();
+    $translate->init();
