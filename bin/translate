@@ -1,9 +1,20 @@
 #!/usr/bin/env php
 <?php
+    declare(strict_types=1);
 
-    use App\Helpers\Translate\Translate;
+    use App\Helpers\Translate;
 
-    require __DIR__ . '/../vendor/autoload.php';
+    $root = dirname(__DIR__);
+
+    require $root . '/vendor/autoload.php';
+
+
+    chdir($root);
+
 
     $translate = new Translate();
-    $translate->init();
+    try {
+        $translate->init();
+    } catch (\League\CommonMark\Exception\CommonMarkException|Exception $e) {
+
+    }

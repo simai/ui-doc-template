@@ -17,9 +17,11 @@ This will copy the project to your local machine and include all core submodules
 ```bash
 git clone --recurse-submodules git@github.com:simai/ui-doc-template.git
 ```
+
 ```bash
 cd <repo>
 ```
+
 ### Initialize submodules (if you didn't use --recurse-submodules)
 
 This command fetches all submodules required by the project:
@@ -65,10 +67,10 @@ A brief overview of the main directories and files:
                 <div class="folder">img</div>
             </div>
             <div class="folder folder--open">_components
-            <div class="file">language.blade.php</div>
-            <div class="file">more.blade.php</div>
-            <div class="file">right-top-menu.blade.php</div>
-            <div class="file">settings.blade.php</div>
+                <div class="file">language.blade.php</div>
+                <div class="file">more.blade.php</div>
+                <div class="file">right-top-menu.blade.php</div>
+                <div class="file">settings.blade.php</div>
             </div>
             <div class="folder folder--open">_layouts
                 <div class="file">core.blade.php</div>
@@ -89,10 +91,28 @@ A brief overview of the main directories and files:
                 <div class="file">top-menu.blade.php</div>
             </div>
             <div class="folder folder--open">helpers
-                <div class="file">Configurator.php</div>
-                <div class="file">CustomTagInterface.php</div>
+                <div class="folder folder--open">CommonMark
+                    <div class="file">Attrs.php</div>
+                    <div class="file">BaseTag.php</div>
+                    <div class="file">CustomTagAdapter.php</div>
+                    <div class="file">CustomTagNode.php</div>
+                    <div class="file">CustomTagRegistry.php</div>
+                    <div class="file">CustomTagRender.php</div>
+                    <div class="file">CustomTagExtension.php</div>
+                    <div class="file">CustomTagSpec.php</div>
+                    <div class="file">TagRegistry.php</div>
+                    <div class="file">UniversalBlockParser.php</div>
+                    <div class="file">UniversalInlineParser.php</div>
+                </div>
+                <div class="folder folder--open">CustomTags
+                    <div class="file">ExampleTag.php</div>
+                </div>
+                <div class="folder folder--open">Interface
+                    <div class="file">CustomTagInterface.php</div>
+                </div>
                 <div class="file">Parser.php</div>
-                <div class="file">TagRegistry.php</div>
+                <div class="file">Translate.php</div>
+                <div class="file">Configurator.php</div>
             </div>
             <div class="file">.gitignore</div>
             <div class="file">404.blade.php</div>
@@ -100,6 +120,7 @@ A brief overview of the main directories and files:
             <div class="file">collections.php</div>
             <div class="file">composer.json</div>
             <div class="file">config.php</div>
+            <div class="file">translate.config.php</div>
             <div class="file">copy-template-configs.js</div>
             <div class="file">eslint.config.js</div>
             <div class="file">favicon.ico</div>
@@ -119,9 +140,6 @@ A brief overview of the main directories and files:
             <div class="file">page.md</div>
         </div>
         <div class="file">index.blade.md</div>
-    </div>
-    <div class="folder folder--open">tags
-        <div class="file">ExampleTag.php</div>
     </div>
     <div class="folder">vendor</div>
     <div class="file">.gitignore</div>

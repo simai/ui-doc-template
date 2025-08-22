@@ -1,194 +1,108 @@
 ---
 extends: _core._layouts.documentation
 section: content
-title: Registering Custom Tags
-description: Registering Custom Tags
+title: Parser (Jigsaw integration)
+description: Parser (Jigsaw integration)
 ---
 
-# Registering Custom Tags via Config
+# Parser (Jigsaw integration)
 
-This system allows you to define and register custom tag classes by specifying their short names (class names without
-namespace) in the configuration.
+This component replaces Jigsaw’s default front‑matter/Markdown parser and installs our **Custom Tags** extension into League CommonMark.
 
-## Define your tags in the config
+---
 
-In your `config.php` file (or wherever you store custom configuration):
+## Location & purpose
+- **Class:** `App\Helpers\Parser`
+- **Extends:** `TightenCo\Jigsaw\Parsers\FrontMatterParser`
+- **Goal:** Build a CommonMark environment with our custom extension and use it to convert Markdown to HTML during the Jigsaw build.
 
-```php 
-return [
-'tags' => [
-'ExampleTag',
-'LinksTag',
-'TestTag',
-],
-];
-```
+---
 
-> These must be class names without `namespace`, e.g., '`ExampleTag`', not `App\Helpers\Tags\ExampleTag`.
-
-## Tag class structure
-
-Each tag class must implement the `CustomTagInterface`. Here’s an example:
-
-```php 
-<?php
-
-namespace App\Helpers\Tags;
-
-use App\Helpers\CustomTagInterface;
-
-class ExampleTag implements CustomTagInterface
+## Constructor wiring
+```php
+public function __construct(FrontYamlParser $frontYaml, CustomTagRegistry $registry)
 {
-    public function getPattern(): string
-    {
-        return '/!example\s*\n([\s\S]*?)\n!endexample/';
-    }
+    parent::__construct($frontYaml);
 
-    public function getTemplate(string $template): string
-    {
-        return "<div class=\"example overflow-hidden radius-1/2 overflow-x-auto\">{$template}</div>";
-    }
+    $env = new Environment();
+    $env->addExtension(new CustomTagsExtension($registry));
+    $env->addExtension(new CommonMarkCoreExtension());
+    $env->addExtension(new FrontMatterExtension());
+    $this->md = new MarkdownConverter($env);
 }
 ```
 
-## Interface contract
+### Dependencies
+- **`FrontYamlParser`** — Jigsaw’s Front Matter YAML parser (used by the parent class).
+- **`CustomTagRegistry`** — Runtime registry of our `CustomTagSpec`s, injected into the custom extension.
 
-The tag class must define two methods:
-!links
+### Installed extensions
+- **`CustomTagsExtension`** — Our extension which registers `UniversalBlockParser` and `CustomTagRenderer`.
+- **`CommonMarkCoreExtension`** — Standard CommonMark block/inline features.
+- **`FrontMatterExtension`** — Allows fenced front matter blocks to be recognized by the converter pipeline when needed.
 
-- `getPattern()`    Returns a regex pattern to match the custom tag in raw Markdown.
-- `getTemplate()`    Receives matched content and returns a rendered HTML snippet.
-  
-!endlinks
+> **Naming note:** elsewhere in docs we use the term **CustomTagExtension** (singular). In code this project uses `CustomTagsExtension` (plural). Both refer to the same extension role; prefer the class name used in your codebase.
 
-## How it works
+---
 
-1. Before the Markdown is rendered, we intercept the raw content using a custom Markdown handler (bound in
-   `bootstrap.php`).
-
-2. Each registered tag is matched using its `getPattern()` method.
-
-3. The matched content is passed to the tag’s `getTemplate()` method, and replaced with the resulting HTML.
-
-4. Then the modified Markdown is passed to the core `Jigsaw Markdown processor`.
-
-This ensures you can extend the Markdown syntax safely without modifying the core renderer.
-
-```php 
-$namespace = 'App\\Helpers\\Tags\\';
-$tags = $jigsaw->getConfig('tags', []);
-$instances = [];
-
-foreach ($tags as $shortName) {
-$className = $namespace . $shortName;
-
-    if (class_exists($className)) {
-        $instances[] = new $className();
-    }
+## Markdown conversion
+```php
+/**
+ * @throws CommonMarkException
+ */
+public function parseMarkdownWithoutFrontMatter($content): string
+{
+    return (string) $this->md->convert($content);
 }
-
-TagRegistry::register($instances);
 ```
+- Jigsaw handles front matter extraction in the parent class; this method converts the **body** Markdown into HTML using our environment.
+- Throws `CommonMarkException` if conversion fails (bubble up for build failure visibility).
 
-This approach gives you the flexibility to define only the tag class names, while keeping the instantiation logic
-centralized.
+---
 
-## Summary
+## Lifecycle in a Jigsaw build
+1. **Bootstrap binding** maps `TightenCo\Jigsaw\Parsers\FrontMatterParser` ➜ `App\Helpers\Parser`.
+2. Jigsaw calls the parser to process each Markdown file:
+    - Parent class parses **front matter** with `FrontYamlParser`.
+    - `parseMarkdownWithoutFrontMatter()` converts the remaining Markdown using our CommonMark `Environment`.
+3. Inside the environment, **CustomTagsExtension** installs:
+    - `UniversalBlockParser` — detects `!type` / `!endtype` blocks and builds `CustomTagNode`s.
+    - `CustomTagRenderer` — renders tag nodes via per‑tag renderers or default wrappers.
 
-With this approach, you can define your own custom block syntaxes like:
+---
 
-```yaml
-!example
-Some markdown inside a custom block.
+## Customization & options
+- **CommonMark configuration:** you can pass an array of options to `Environment` if needed:
+  ```php
+  $env = new Environment(['renderer' => ['inner_separator' => "\n"]]);
+  ```
+- **Additional extensions:** add other official extensions (tables, autolinks, etc.) by calling `$env->addExtension(new ...)` before creating `MarkdownConverter`.
+- **Event hooks:** the class imports `DocumentParsedEvent`; you can register listeners on the environment if post‑processing of the AST is required (e.g., slug generation, TOC). Example:
+  ```php
+  $env->addEventListener(DocumentParsedEvent::class, function (DocumentParsedEvent $e) {
+      // mutate $e->getDocument() as needed
+  });
+  ```
+
+---
+
+## Troubleshooting
+- **Custom tags not recognized:** ensure `bootstrap.php` binds `FrontMatterParser::class` to `App\Helpers\Parser::class` and that `CustomTagsExtension` is added.
+- **Per‑tag renderer not invoked:** verify the registry contains specs with `renderer` closures; the same registry instance must be passed to the extension and renderer.
+- **Front matter leaks into HTML:** confirm Jigsaw is stripping it (parent class handles this) and that your Markdown file has correct front matter delimiters.
+- **Build fails with `CommonMarkException`:** inspect the content for invalid HTML/Markdown, or temporarily remove custom extensions to isolate the cause.
+
+---
+
+## Minimal test
+Create a fixture document:
+```md
+---
+title: Parser test
+---
+
+!example class:"mb-2"
+Hello **world**
 !endexample
 ```
-
-And have it automatically rendered into custom HTML:
-
-```html
-
-<div class="example overflow-hidden radius-1/2 overflow-x-auto">
-    Some markdown inside a custom block.
-</div>
-```
-
-## Folder structure
-
-Your tag classes should live under:
-
-
-<div class="files">
-    <div class="folder folder--open">Tags
-        <div class="file">ExampleTag1.php</div>
-        <div class="file">ExampleTag2.php</div>
-        <div class="file">ExampleTag3.php</div>
-    <div class="ellipsis">...</div>
-    </div>
-</div>
-
-Each class should follow a consistent interface/structure (depending on your TagRegistry requirements).
-
-## Namespace change
-
-> If your tags are located in a different namespace or folder, just change the `$namespace` variable in `bootstrap.php`
-> accordingly:
-
-```php 
-$namespace = 'App\\MyCustom\\Tags\\';
-```
-
-## Adding Classes to HTML Elements via Markdown Syntax
-
-This snippet post-processes your HTML after Markdown rendering to support "inline class assignments" using the (
-`.class1.class2`) or (`.foo, .bar`) syntax.
-
-```yaml
-This is some text. (.class1.class2)
-```
-
-or
-
-```yaml
-- List item text (.foo,.bar)
-```
-
-It works for ANY HTML element (paragraphs, lists, headings, etc).
-If the element’s content ends with (`.class1.class2`) or (`.foo, .bar`), these classes will be added to the element, and
-the (`.class...`) part will be removed from the output.
-
-### How to Use
-
-Run this code on your `$content` immediately after `Markdown` parsing (when you have HTML, but before rendering).
-
-Classes will be added to ANY HTML element, only if the class expression is directly at the end of that element’s
-content.
-
-### Example
-
-Markdown:
-
-```yaml
-This is a warning message. (.warning.red)
-```
-
-After Markdown and this post-process:
-
-```html
-<p class="warning red">This is a warning message.</p>
-```
-
-Or in a list:
-
-```yaml 
-- Click here to continue (.next-step.big)
-```
-
-```html
-
-<li class="next-step big">Click here to continue</li>
-```
-
-> Tip:
-> This works for any element.
-> Just make sure the (`.class1.class2`) appears inside the same `paragraph/list/block` as your target text, with no empty
-> lines in between.
+Expected output includes a wrapper element with merged classes and the bold text rendered.
