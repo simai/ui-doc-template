@@ -78,7 +78,7 @@ The root config (e.g., `translate.config.php`) controls input/output paths and l
 return [
     'source_dir'          => __DIR__ . '/source/',
     'target_lang'         => 'en',          // base locale (source of truth)
-    'main'                => __DIR__ . '/', // project root
+    'main'                => __DIR__ . 'content-translation-engine.md/', // project root
     'cache_dir'           => 'temp/',
 
     'frontMatter'         => ['title', 'description'],

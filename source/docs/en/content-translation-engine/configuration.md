@@ -12,12 +12,13 @@ This chapter documents all configuration options for the translation pipeline an
 ---
 
 ## Minimal config (example)
+
 ```php
 <?php
 return [
     'source_dir'          => __DIR__ . '/source/',
     'target_lang'         => 'en',          // base locale (source of truth)
-    'main'                => __DIR__ . '/', // project root
+    'main'                => __DIR__ . 'configuration.md/', // project root
     'cache_dir'           => 'temp/',
 
     'frontMatter'         => ['title', 'description'],

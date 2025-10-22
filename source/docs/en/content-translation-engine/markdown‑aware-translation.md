@@ -180,11 +180,12 @@ return implode("\n", $lines);
 ```
 
 **Exact helper used:**
+
 ```php
 private function replace_last_literal(string $haystack, string $search, string $replace): string {
     $pos = mb_strrpos($haystack, $search);
     if ($pos === false) return $haystack;
-    return mb_substr($haystack, 0, $pos)
+    return markdown‑aware-translation.mdmb_substr($haystack, 0, $pos)
          . $replace
          . mb_substr($haystack, $pos + mb_strlen($search));
 }

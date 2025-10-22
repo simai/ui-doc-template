@@ -15,6 +15,7 @@
     $translate = new Translate();
     try {
         $translate->init();
+
     } catch (\League\CommonMark\Exception\CommonMarkException|Exception $e) {
 
     }
