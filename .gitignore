@@ -12,6 +12,7 @@ webpack.mix.js
 composer.lock
 .env
 temp
+trash
 /translate.config.php
 npm-debug.log
 /package-lock.json
