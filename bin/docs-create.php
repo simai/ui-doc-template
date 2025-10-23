@@ -67,11 +67,11 @@
         $dirPart   = $isCategory ? $slugPath : dirname($slugPath);
         $filePart  = $isCategory ? null : basename($slugPath);
         $pageDir   = $dirPart === '.' || $dirPart === '' ? $docsDir : $docsDir . '/' . $dirPart;
-        // paths
+
         $settingsPath = $pageDir . '/.settings.php';
         $pagePath     = $isCategory ? null : ($pageDir . '/' . $filePart . '.md');
 
-        // for pages: skip menu if folder == file
+
         $parentLeaf = ($dirPart === '.' || $dirPart === '') ? null : basename($dirPart);
         $skipMenuForPage = (!$isCategory) && ($parentLeaf !== null && $parentLeaf === $filePart);
 
@@ -80,7 +80,7 @@
             ensureDir($pageDir, $dry);
         }
 
-        // load/prepare settings for current (category or page) dir
+
         $settings = [
             'title' => $title,
             'order' => $order ?? 10,
@@ -94,14 +94,14 @@
                 if (!$isCategory && !$skipMenuForPage) {
                     $settings['menu'] = isset($loaded['menu']) && is_array($loaded['menu']) ? $loaded['menu'] : [];
                 } elseif ($isCategory && isset($loaded['menu']) && is_array($loaded['menu'])) {
-                    // категории обычно имеют меню для вложенных пунктов — оставим, если уже было
+
                     $settings['menu'] = $loaded['menu'];
                 }
             }
         }
         if ($settingsExists && $order !== null) { $settings['order'] = $order; }
 
-        // write page .md (only for page mode)
+
         if (!$isCategory) {
             if (!file_exists($pagePath)) {
                 $frontMatter = "---\n"
@@ -119,13 +119,13 @@
                         fwrite(STDERR, "Failed to write page: {$pagePath}\n");
                         return false;
                     }
-//                    echo "Created page: " . rel($pagePath, $baseDir) . "\n";
+
                 }
             } else {
                 echo "Page already exists: " . rel($pagePath, $baseDir) . "\n";
             }
 
-            // menu in current dir (unless folder==file)
+
             if (!$skipMenuForPage) {
                 $menuKey = $filePart;
                 if (!isset($settings['menu'])) $settings['menu'] = [];
@@ -211,7 +211,6 @@
         $slug=null; $title=null; $order=null; $isCategory=false; $noParentMenu=false;
 
         if (is_array($item)) {
-            // assoc?
             if (array_keys($item) !== range(0, count($item)-1)) {
                 $slug  = $item['slug']  ?? null;
                 $title = $item['title'] ?? null;
