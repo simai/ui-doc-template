@@ -60,14 +60,15 @@ jobs:
           script: |
             set -e
             cd /var/www/dev/data/git/ui-doc-template
+            export HOME=/home/git
             mkdir -p ~/.ssh
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
             git config --global --add safe.directory /var/www/dev/data/git/ui-doc-template
             git pull --ff-only origin main
             export YARN_IGNORE_ENGINES=1
-            export HOME=/home/git
-            export XDG_CONFIG_HOME=$HOME/.config
-            mkdir -p "$XDG_CONFIG_HOME"
+            export XDG_CONFIG_HOME=$PWD/.config
+            export XDG_CACHE_HOME=$PWD/.cache
+            mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
             yarn install
             composer install --no-dev --prefer-dist --no-interaction
             yarn prod
