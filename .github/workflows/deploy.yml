@@ -37,9 +37,6 @@ jobs:
       - name: Build frontend assets
         run: yarn prod
 
-      - name: Build static site
-        run: ./vendor/bin/jigsaw build production
-
       - name: Prepare .env
         run: |
           cat <<'EOF' > .env
@@ -48,6 +45,9 @@ jobs:
           AZURE_REGION=''
           AZURE_ENDPOINT=https://api.cognitive.microsofttranslator.com
           EOF
+
+      - name: Build static site
+        run: ./vendor/bin/jigsaw build production
 
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v0.1.8
