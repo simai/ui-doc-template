@@ -127,11 +127,11 @@ class-based components that use the Components namespace, add an autoload entry 
 
 > composer.json
 
-```
+```json
 "autoload": {
-"psr-4": {
-"Components\\": "where/you/want/to/keep/component/classes/"
-}
+  "psr-4": {
+  "Components": "where/you/want/to/keep/component/classes/"
+  }
 }
 ```
 

@@ -2,208 +2,175 @@
 extends: _core._layouts.documentation
 section: content
 title: Коллекции
-description: Коллекции
+description: 'Collections with ENV-driven, multi-language setup'
 ---
 
 # Коллекции
 
-!example
-Пример компонента example с парсером markdown
-!endexample
+In this project, collections are defined **dynamically** from an environment-driven docs root.  
+Instead of declaring collections inline in `config.php`, we load them from `source/_core/collections.php`, which scans language folders under `DOCS_DIR`.
 
-Jigsaw предоставляет мощные возможности для работы с группами связанных страниц или коллекциями. Коллекции дают вам
-возможность доступа к вашему контенту на агрегированном уровне, что позволяет легко добавлять почти динамические функции, такие как меню,
-Пагинация, категории и теги на ваш статический сайт.
+## Как это работает
 
-Коллекции можно использовать для создания страниц со связанным контентом, например записей в блогах или статей, отсортированных по
-date, с индексной страницей, отображающей краткие сведения о пяти последних публикациях, или для встраивания связанных блоков контента.
-на странице для такого контента, как биографии сотрудников, описания продуктов или портфолио проектов.
+1. You set the docs root in `.env`:
 
-## Определение коллекции
+   ```text
+   DOCS_DIR=docs
+   ```
 
-Чтобы определить коллекцию, добавьте в config.php массив с именем collections. Каждая коллекция должна быть обозначена названием
-коллекция (как правило, во множественном числе), за которой следует массив настроек. Например:
+2. The loader reads `source/<DOCS_DIR>/*` (e.g. `source/docs/en`, `source/docs/ru`) and creates **one collection per language**.
 
-> config.php
+3. Each collection is named as `<docs-dir-with-dashes>-<lang>`, for example:
 
-```php 
+   - `docs-en`
+   - `docs-ru`
+
+4. The output paths are generated to keep Jigsaw’s _pretty URLs_:
+   - `.../index.md` → `/en/index.html`, `/en/start/index.html`, …
+   - `.../page.md` → `/en/.../page/index.html`
+
+## Enabling the collections
+
+> `config.php`
+
+```php
 <?php
 
 return [
-    'company' => 'Tighten',
-    'contact_email' => 'support@tighten.co',
-    'collections' => [
-        'people' => [
-            'path' => 'people',
-            'sort' => 'last_name',
-        ],
-        'posts' => [
-            'path' => 'blog/{date|Y-m-d}/{filename}',
-            'author' => 'Tighten',
-        ],
-    ],
+    // …
+    'collections' => require_once 'source/_core/collections.php',
 ];
 ```
 
-Jigsaw будет искать элементы коллекции в каталоге с тем же именем, что и ваша коллекция, перед которым стоит символ подчеркивания:
-В этом примере `_people` и `_posts`. Элементами коллекции могут быть файлы Markdown или Blade, или даже гибрид Blade/Markdown
-Файлы.
+## The collections loader
+
+> `source/_core/collections.php`
+
+```php
+<?php
+
+use Illuminate\Support\Str;
+
+$collections = [];
+
+// Turn "docs" or "docs/content" into "docs" or "docs-content"
+$collectionName = collect(explode('/', trim(str_replace('\\', '/', $_ENV['DOCS_DIR']), '/')))
+    ->implode('-');
+
+// Scan language folders: source/<DOCS_DIR>/*  -> en, ru, …
+foreach (glob('./source/' . $_ENV['DOCS_DIR'] . '/*', GLOB_ONLYDIR) as $dir) {
+    $lang = basename($dir);
+
+    $collections["{$collectionName}-{$lang}"] = [
+        // point to "docs" (the directory under source/)
+        'directory' => basename('/source/' . $_ENV['DOCS_DIR']),
+        'language'  => $lang,
+        'extends'   => '_core._layouts.documentation',
+
+        // only .md pages
+        'filter' => fn ($page) => $page->_meta->extension === 'md',
+
+        // build pretty, language-prefixed paths
+        'path' => function ($page) use ($lang) {
+            $relative = trim(str_replace('\\', '/', $page->_meta->relativePath), '/');
+
+            // index.md (root or nested) → no explicit "/index" here;
+            // PrettyOutputPathResolver will add index.html.
+            if ($page->_meta->filename === 'index') {
+                return $lang . ($relative ? '/' . $relative : '');
+            }
+
+            // other pages → /<lang>/<relative>/<filename>
+            return $lang . ($relative ? '/' . $relative : '') . '/' . $page->_meta->filename;
+        },
+    ];
+}
+
+return $collections;
+```
+
+## Example structure
 
 <div class="files">
-    <div class="folder folder--open">source
-        <div class="folder">_assets</div>
-        <div class="folder folder--open">_layouts
-            <div class="file">master.blade.php</div>
-            <div class="file">post.blade.php</div>
+  <div class="folder folder--open">
+    source
+    <div class="folder folder--open">
+      docs
+      <div class="folder folder--open">
+        en
+        <div class="file">.settings.php</div>
+        <div class="file">index.md</div>
+        <div class="folder folder--open">
+          category
+          <div class="file">index.md</div>
+          <div class="file">install.md</div>
         </div>
-        <div class="folder folder--open">_people
-            <div class="file">george-michael-bluth.blade.php</div>
-            <div class="file">j-walter-weatherman.blade.php</div>
-            <div class="file">steve-holt.blade.php</div>
+        <div class="folder folder--open">
+          category2
+          <div class="file">index.md</div>
         </div>
-        <div class="folder folder--open focus">_posts
-            <div class="file">1-my-first-post.md</div>
-            <div class="file">2-my-second-post.md</div>
-            <div class="file">3-my-third-post.md</div>
-        </div>
-        <div class="folder">assets</div>
-        <div class="file">about-us.blade.php</div>
-        <div class="file">blog.blade.php</div>
-        <div class="file">index.blade.php</div>
+      </div>
     </div>
-    <div class="folder">tasks</div>
-    <div class="folder">vendor</div>
-    <div class="file">bootstrap.php</div>
-    <div class="file">composer.json</div>
-    <div class="file">composer.lock</div>
-    <div class="file">config.php</div>
-    <div class="file">package.json</div>
-    <div class="file">webpack.mix.js</div>
+    <div class="folder">ru</div>
+  </div>
 </div>
 
-В `config.php`, массив, в котором вы определяете свою коллекцию, может содержать параметры пути и сортировки для коллекции, как
-а также переменные и вспомогательные функции. Однако ни один из этих элементов не является обязательным; если опущено, путь по умолчанию и сортировка
-Будут использоваться настройки. На самом деле, для простейшей конфигурации с использованием настроек по умолчанию и без переменных или функций, вы
-может определить коллекцию с помощью простого ее имени:
+**Build output (simplified):**
 
-> config.php
+<div class="files">
+  <div class="folder folder--open">
+    build_local
+    <div class="folder folder--open">
+      en
+      <div class="file">index.html</div>
+      <div class="folder folder--open">
+        category
+        <div class="file">index.html</div>
+        <div class="folder folder--open">
+          install
+          <div class="file">index.html</div>
+        </div>
+      </div>
+      <div class="folder folder--open">
+        category2
+        <div class="file">index.html</div>
+      </div>
+    </div>
+  </div>
+  <div class="folder folder--open">
+    ru
+    <div class="file">index.html</div>
+  </div>
+</div>
 
-```php 
-<?php
+## Using collections in Blade
 
-return [
-    'collections' => [ 'posts' ],
-];
-```
+You can iterate over a language collection to build navigation, lists, etc.  
+Collection variables follow the generated names (e.g. `docs-en`, `docs-ru`). If a hyphenated name is inconvenient in Blade, access through the page data:
 
-## Создание страниц коллекций
-
-Если вы хотите создать отдельную страницу для каждого элемента коллекции, выполните следующие действия. `example`, страница для каждого блога
-post — указываем файл родительского шаблона в ключе extends переднего элемента YAML или с помощью метода `@extends` в директиве
-Пилкой лезвия, так же, как вы делаете это с обычной страницей лобзика. Например:
-
-> my-first-post.md
-
-```yaml
----
-extends: _layouts.post
-title: My First Blog Post
-author: Keith Damiani
-date: 2017-03-23
-section: content
----
-
-This post is *profoundly* interesting.
-```
-
-> _layouts/post.blade.php
-
-```blade 
-@extends('_layouts.master')
-
-@section('body')
-<h1>{{ $page->title }}</h1>
-<p>By {{ $page->author }} • {{ date('F j, Y', $page->date) }}</p>
-
-    @yield('content')
-
-@endsection
-```
-
-## Доступ к элементам коллекции
-
-В любом шаблоне Blade у вас есть доступ к каждой из ваших коллекций с помощью переменной с именем коллекции. Этот
-Переменная ссылается на объект, который содержит все элементы в вашей коллекции и может быть переведен для доступа
-отдельные предметы коллекции. Переменная collection также ведет себя так, как если бы это была коллекция Illuminate в Laravel,
-это означает, что у вас есть доступ ко всем стандартным методам сбора данных Laravel, таким как `count()`, `filter()`и `where()`.
-
-Например, чтобы создать список заголовков для всех записей блога, можно выполнить итерацию по объекту $posts в блейде
-`@foreach` и отобразить параметр `title` свойство, которое вы определили в заголовке YAML каждой записи:
-> posts.blade.php
-
-```blade 
-<p>Total of {{ $posts->count() }} posts</p>
-
-<ul>
-@foreach ($posts as $post)
-    <li>{{ $post->title }}</li>
-@endforeach
-</ul>
-```
-
-Например, предполагая, что все посты имеют на своем YAML-фронте значение свойства `author`, чтобы отфильтровать все сообщения из тега
-конкретного автора, вы можете отфильтровать коллекцию `$posts` и сгенерируйте новую коллекцию:
-
-> author_posts.blade.php
-
-```blade 
+```blade
 @php
-$authorPosts = $posts->filter(function ($value, $key) use ($page) {
-return $value->author == $page->author;
-});
+  $docsEn = $page->collections['docs-en'] ?? collect();
 @endphp
 
-@if ($authorPosts->count() > 0)
 <ul>
-@foreach ($authorPosts as $post)
-<li>{{ $post->title }}</li>
-@endforeach
+  @foreach ($docsEn as $doc)
+    <li><a href="{{ $doc->getPath() }}">{{ $doc->title ?? $doc->getFilename() }}</a></li>
+  @endforeach
 </ul>
-@endif
 ```
 
-## Метаданные коллекции
+> Tip: front matter like `title`, `nav_order`, etc., can be defined per page and used for sorting or building menus.
 
-В дополнение к метаданным, доступным для каждой страницы, таким как `getPath()`, `getUrl()`и `getFilename()`коллекция
-Элементы
-имеют доступ к нескольким дополнительным функциям:
-!links
+## Notes & gotchas
 
-- `getContent()` возвращает основное содержимое элемента коллекции, т.е. тело файла Markdown (в настоящее время
-  `getContent()` доступно только для файлов Markdown)
-- `getCollection()` возвращает имя коллекции
-- `getPrevious()` и `getNext()` Укажите смежные элементы в коллекции в соответствии с сортировкой коллекции по умолчанию
-  порядок
-- `getFirst()` возвращает первый элемент коллекции (как это делает метод коллекции Laravel `first()`)
-- `getLast()` возвращает последний элемент коллекции (как это делает метод коллекции Laravel `last()`)
+- Keep folder names URL-friendly (no spaces); prefer `local-development` over `Local Development`.
+- Для **root** `index.md` in each language, the path function must return only the language segment (`en`, `ru`) — the resolver will write `index.html` automatically.
+- Vanilla Jigsaw collapses items with matching filenames across a collection (e.g. `category1/index.md` vs. `category2/index.md`). Our loader keys by relative path instead, so duplicate filenames in different folders now work.
+- Clear your build/cache if paths change:
 
-!endlinks
+  ```bash
+  rm -rf build_local/ cache/
+  ```
 
-> _layouts/post.blade.php
-
-```blade 
-@extends('_layouts.master')
-
-@section('body')
-<h1>{{ $page->title }}</h1>
-
-    @yield('content')
-
-    @if ($page->getNext())
-        <p>Read my next post:
-            <a href="{{ $page->getNext()->getPath() }}">{{ $page->getNext()->title }}</a>
-        </p>
-    @endif
-
-@endsection
-```
+That’s it — this mirrors your current setup while staying consistent with Jigsaw’s conventions.

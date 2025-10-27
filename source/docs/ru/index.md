@@ -42,6 +42,18 @@ yarn install
 composer install
 ```
 
+### Configure environment variables:
+
+In the root directory of your project, create a `.env` file and add the required configuration values:
+
+```text
+AZURE_KEY=<AZURE_KEY>
+AZURE_REGION=<AZURE_REGION>
+AZURE_ENDPOINT=https://api.cognitive.microsofttranslator.com
+DOCS_DIR=docs
+```
+
+
 ## Запуск в режиме разработки:
 
 Запустите сервер разработки и следите за изменениями для автоматической сборки документации:
@@ -58,6 +70,10 @@ yarn run watch
 
 <div class="files">
     <div class="folder">build_env</div>
+    <div class="folder folder--open">bin
+        <div class="file">translate.php</div>
+        <div class="file">docs-create.php</div>
+    </div>
     <div class="folder folder--open">source
         <div class="folder folder--open">_core
             <div class="folder folder--open">_assets
@@ -110,6 +126,14 @@ yarn run watch
                 <div class="folder folder--open">Interface
                     <div class="file">CustomTagInterface.php</div>
                 </div>
+                <div class="folder folder--open">Handlers
+                    <div class="file">CollectionDataLoader.php</div>
+                    <div class="file">CollectionHandler.php</div>
+                    <div class="file">CustomCollectionItemHandler.php</div>
+                    <div class="file">CustomIgnoredHandler.php</div>
+                    <div class="file">CustomOutputPathResolver.php</div>
+                    <div class="file">MultipleHandler.php</div>
+                </div>
                 <div class="file">Parser.php</div>
                 <div class="file">Translate.php</div>
                 <div class="file">Configurator.php</div>
@@ -129,16 +153,17 @@ yarn run watch
             <div class="file">package.json</div>
             <div class="file">webpack.mix.js</div>
         </div>
-        <div class="folder folder--open">_docs-(lang)
-            <div class="folder">section-name</div>
-            <div class="folder">section-name</div>
-            <div class="folder">section-name</div>
-            <div class="folder">section-name</div>
-            <div class="file">.lang.php</div>
-            <div class="file">.settings.php</div>
-            <div class="file">index.md</div>
-            <div class="file">page.md</div>
-        </div>
+            <div class="folder folder--open">docs
+                <div class="folder folder--open">{$lang}
+                    <div class="folder">section-name</div>
+                    <div class="folder">section-name</div>
+                    <div class="folder">section-name</div>
+                    <div class="folder">section-name</div>
+                    <div class="file">.lang.php</div>
+                    <div class="file">.settings.php</div>
+                    <div class="file">index.md</div>
+                </div>
+            </div>
         <div class="file">index.blade.md</div>
     </div>
     <div class="folder">vendor</div>

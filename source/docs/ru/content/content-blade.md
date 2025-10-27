@@ -127,11 +127,11 @@ description: 'Шаблоны и частичные лезвия'
 
 > composer.json
 
-```
+```json
 "autoload": {
-"psr-4": {
-"Components\\": "where/you/want/to/keep/component/classes/"
-}
+  "psr-4": {
+  "Components": "where/you/want/to/keep/component/classes/"
+  }
 }
 ```
 
