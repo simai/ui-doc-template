@@ -60,6 +60,8 @@ jobs:
           script: |
             set -e
             cd /var/www/dev/data/git/ui-doc-template
+            mkdir -p ~/.ssh
+            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
             git config --global --add safe.directory /var/www/dev/data/git/ui-doc-template
             git pull --ff-only origin main
             export YARN_IGNORE_ENGINES=1
@@ -67,4 +69,4 @@ jobs:
             composer install --no-dev --prefer-dist --no-interaction
             yarn prod
             ./vendor/bin/jigsaw build production
-            rsync -av --delete /var/www/dev/data/git/ui-doc-template/build_production/ /var/www/dev/data/www/ui.simai.io/
+            rsync -av --delete /var/www/dev/data/git/ui-doc-template/build_production/ /var/www/dev/data/www/doc.simai.io/
