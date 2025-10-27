@@ -1,42 +1,60 @@
-name: Deploy to Server
+name: Deploy Docara
 
 on:
   push:
     branches:
-      - main  # Замените на нужную ветку
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-    - name: Deploy via SSH
-      uses: appleboy/ssh-action@v0.1.8
-      with:
-        host: ${{ vars.SSH_SERVER }}
-        username: ${{ vars.SSH_USER }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
-        port: ${{ vars.SSH_PORT }}
-        script: |
-          # Переход в директорию проекта
-          cd /var/www/dev/data/git/ui-doc
-          
-          # Обновление кода из ветки main
-          git pull origin main
-           # Установка npm-зависимостей
-          npm install
-          
-          # Установка зависимостей Composer
-          composer install --no-dev --prefer-dist --no-interaction
-          
-  
-          
-          # Сборка ассетов
-          npm run prod
-          
-          # Сборка сайта для production
-          ./vendor/bin/jigsaw build production
-    
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.1"
+          coverage: none
+          tools: composer
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: Install JavaScript dependencies
+        run: |
+          corepack enable
+          yarn install --frozen-lockfile
+
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Build frontend assets
+        run: yarn prod
+
+      - name: Build static site
+        run: ./vendor/bin/jigsaw build production
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ vars.SSH_SERVER }}
+          username: ${{ vars.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ vars.SSH_PORT }}
+          script: |
+            set -e
+            cd /var/www/dev/data/git/ui-doc-template
+            git pull --ff-only origin main
+            yarn install --frozen-lockfile
+            composer install --no-dev --prefer-dist --no-interaction
+            yarn prod
+            ./vendor/bin/jigsaw build production
+            rsync -av --delete /var/www/dev/data/git/ui-doc-template/build_production/ /var/www/dev/data/www/doc.simai.io/
