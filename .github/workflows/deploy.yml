@@ -29,9 +29,7 @@ jobs:
           cache: "yarn"
 
       - name: Install JavaScript dependencies
-        run: |
-          corepack enable
-          yarn install --frozen-lockfile
+        run: yarn install
 
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist
@@ -53,7 +51,7 @@ jobs:
             set -e
             cd /var/www/dev/data/git/ui-doc-template
             git pull --ff-only origin main
-            yarn install --frozen-lockfile
+            yarn install
             composer install --no-dev --prefer-dist --no-interaction
             yarn prod
             ./vendor/bin/jigsaw build production
