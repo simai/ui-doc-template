@@ -60,6 +60,7 @@ jobs:
           script: |
             set -e
             cd /var/www/dev/data/git/ui-doc-template
+            git config --global --add safe.directory /var/www/dev/data/git/ui-doc-template
             git pull --ff-only origin main
             export YARN_IGNORE_ENGINES=1
             yarn install
