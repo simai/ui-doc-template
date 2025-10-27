@@ -9,7 +9,7 @@ description: Markdown
 
 Have some pages you’d rather write in Markdown than Blade? We know the feeling.
 
-Using Markdown in Jigsaw is as simple as using a .markdown or .md extension, and specifying a few details in YAML front
+Using Markdown in Docara is as simple as using a .markdown or .md extension, and specifying a few details in YAML front
 matter.
 
 For example, say you have this layout and you’d like to populate the content section using Markdown:

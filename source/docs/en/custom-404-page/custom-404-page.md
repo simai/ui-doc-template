@@ -13,7 +13,7 @@ How you do this depends on where your site is hosted.
 ## Using GitHub Pages or Netlify
 
 Some hosts, like GitHub Pages and Netlify, are automatically configured to look for a file named `404.html` at the root
-level of your site. If your Jigsaw site is using pretty URLs, you can specify a `permalink` in the file for your custom
+level of your site. If your Docara site is using pretty URLs, you can specify a `permalink` in the file for your custom
 404 page so that the `.html` extension is preserved:
 
 > source/404.md
@@ -35,7 +35,7 @@ This will create a file named `404.html` in your site’s `build` directory.
 
 ## Using an Nginx Server
 
-You can create your custom 404 file as `404.md` or `404.blade.php` in your source directory, and if your Jigsaw site is
+You can create your custom 404 file as `404.md` or `404.blade.php` in your source directory, and if your Docara site is
 using pretty URLs, it will be output as `/404/index.html`:
 
 > source/404.md

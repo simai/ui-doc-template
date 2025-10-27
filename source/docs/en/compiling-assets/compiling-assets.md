@@ -7,8 +7,8 @@ description: Compiling Assets
 
 # Compiling Assets
 
-Jigsaw sites are configured with support for Vite out of the box. If you’ve ever used Vite in a Laravel project, you
-already know how to use Vite with Jigsaw.
+Docara sites are configured with support for Vite out of the box. If you’ve ever used Vite in a Laravel project, you
+already know how to use Vite with Docara.
 
 ## Setup
 

@@ -26,4 +26,4 @@ example, a file named `some-file.blade.xml` will be processed by Blade, then wil
 `my-jigsaw-site.com/some-file.xml`.
 
 ## Other files
-Any other files, such as `.html` files, will be copied directly to your `build` folders without being modified by Jigsaw.
+Any other files, such as `.html` files, will be copied directly to your `build` folders without being modified by Docara.

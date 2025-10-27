@@ -53,7 +53,7 @@ Attributes on the open line support:
 
 1. **Create a tag class** that extends `BaseTag` and returns a unique `type()`.
 2. **Register** the class name in `config.php` under the `tags` array.
-3. **Build the site** so Jigsaw picks up the registry and our custom parser.
+3. **Build the site** so Docara picks up the registry and our custom parser.
 
 ---
 
@@ -105,11 +105,11 @@ final class ExampleTag extends BaseTag
 
 ---
 
-## Jigsaw integration (summary)
+## Docara integration (summary)
 
 * Tag classes live in `App\Helpers\CustomTags` and extend `BaseTag`.
 * Short class names are listed in `config.php => tags`.
-* `bootstrap.php` binds the tag registry and swaps Jigsaw’s default parser with our `Parser`, which installs a `CustomTagExtension` for CommonMark.
+* `bootstrap.php` binds the tag registry and swaps Docara’s default parser with our `Parser`, which installs a `CustomTagExtension` for CommonMark.
 
 > See the dedicated page **Registering Custom Tags** for the exact configuration snippets.
 

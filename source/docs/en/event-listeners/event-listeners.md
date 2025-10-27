@@ -7,7 +7,7 @@ description: Event Listeners
 
 # Event Listeners
 
-Jigsaw provides three events that you can hook into, in order to run custom code before and after your build is
+Docara provides three events that you can hook into, in order to run custom code before and after your build is
 processed.
 !links
 

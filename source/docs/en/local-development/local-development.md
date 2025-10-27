@@ -13,8 +13,8 @@ To preview your site locally, you’ll first need to create a .env file and spec
 APP_URL=http://your_url_here
 ```
 
-## Using Jigsaw
-Jigsaw includes a serve command that makes your site available at http://localhost:8000. You can use this URL directly in your .env file:
+## Using Docara
+Docara includes a serve command that makes your site available at http://localhost:8000. You can use this URL directly in your .env file:
 
 ```bash
 APP_URL=http://localhost:8000
@@ -54,11 +54,11 @@ LARAVEL    plugin v1.2.0
 
 ➜  APP_URL: http://mysite.test
 
-Initial Jigsaw build completed.
+Initial Docara build completed.
 ```
 You can then visit your local URL (e.g., http://mysite.test) in your browser to view your site.
 
-Jigsaw generates your static HTML files in the /build_local directory and watches for changes. Any modifications to your content (whether Markdown or Blade files) will automatically trigger a full page reload in your browser.
+Docara generates your static HTML files in the /build_local directory and watches for changes. Any modifications to your content (whether Markdown or Blade files) will automatically trigger a full page reload in your browser.
 
 These reloads are logged in your terminal:
 ```bash

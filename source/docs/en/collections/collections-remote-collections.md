@@ -55,7 +55,7 @@ return [
 @endsection
 ```
 
-Under the hood, Jigsaw will:
+Under the hood, Docara will:
 
 1. Create a `_tmp` directory in the collection’s directory (e.g. `source/_posts/_tmp`) to store temporary Markdown files for
 each remote collection item

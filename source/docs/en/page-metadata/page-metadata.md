@@ -6,7 +6,7 @@ description: Page Metadata
 ---
 
 # Page Metadata
-For each page, Jigsaw provides you with certain metadata values through `get` functions accessed on the `$page` object:
+For each page, Docara provides you with certain metadata values through `get` functions accessed on the `$page` object:
 
 `$page->getPath()` returns the path to the current page, relative to the site root
 

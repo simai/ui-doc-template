@@ -7,6 +7,8 @@ description: Installation
 
 # Installation
 
+Docara, our documentation framework, is built on top of Jigsaw with a layer of custom improvements to better handle multi-language setups and collection routing.
+
 Jigsaw requires PHP 8.1+ and Composer. Before installing Jigsaw, make sure you have [Composer](https://getcomposer.org/)
 installed on your machine.
 
@@ -52,7 +54,6 @@ AZURE_REGION=<AZURE_REGION>
 AZURE_ENDPOINT=https://api.cognitive.microsofttranslator.com
 DOCS_DIR=docs
 ```
-
 
 ## Run in development mode:
 
@@ -172,5 +173,3 @@ A brief overview of the main directories and files:
     <div class="file">eslint.config.js</div>
     <div class="file">package.json</div>
 </div>
-
-

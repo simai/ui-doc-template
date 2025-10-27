@@ -1,11 +1,11 @@
 ---
 extends: _core._layouts.documentation
 section: content
-title: Parser (Jigsaw integration)
-description: Parser (Jigsaw integration)
+title: Parser (Docara integration)
+description: Parser (Docara integration)
 ---
 
-# Parser (Jigsaw integration)
+# Parser (Docara integration)
 
 This component replaces Jigsaw’s default front‑matter/Markdown parser and installs our **Custom Tags** extension into League CommonMark.
 
@@ -14,7 +14,7 @@ This component replaces Jigsaw’s default front‑matter/Markdown parser and in
 ## Location & purpose
 - **Class:** `App\Helpers\Parser`
 - **Extends:** `TightenCo\Jigsaw\Parsers\FrontMatterParser`
-- **Goal:** Build a CommonMark environment with our custom extension and use it to convert Markdown to HTML during the Jigsaw build.
+- **Goal:** Build a CommonMark environment with our custom extension and use it to convert Markdown to HTML during the Docara build.
 
 ---
 
@@ -55,14 +55,14 @@ public function parseMarkdownWithoutFrontMatter($content): string
     return (string) $this->md->convert($content);
 }
 ```
-- Jigsaw handles front matter extraction in the parent class; this method converts the **body** Markdown into HTML using our environment.
+- Docara handles front matter extraction in the parent class; this method converts the **body** Markdown into HTML using our environment.
 - Throws `CommonMarkException` if conversion fails (bubble up for build failure visibility).
 
 ---
 
-## Lifecycle in a Jigsaw build
+## Lifecycle in a Docara build
 1. **Bootstrap binding** maps `TightenCo\Jigsaw\Parsers\FrontMatterParser` ➜ `App\Helpers\Parser`.
-2. Jigsaw calls the parser to process each Markdown file:
+2. Docara calls the parser to process each Markdown file:
     - Parent class parses **front matter** with `FrontYamlParser`.
     - `parseMarkdownWithoutFrontMatter()` converts the remaining Markdown using our CommonMark `Environment`.
 3. Inside the environment, **CustomTagsExtension** installs:
@@ -89,7 +89,7 @@ public function parseMarkdownWithoutFrontMatter($content): string
 ## Troubleshooting
 - **Custom tags not recognized:** ensure `bootstrap.php` binds `FrontMatterParser::class` to `App\Helpers\Parser::class` and that `CustomTagsExtension` is added.
 - **Per‑tag renderer not invoked:** verify the registry contains specs with `renderer` closures; the same registry instance must be passed to the extension and renderer.
-- **Front matter leaks into HTML:** confirm Jigsaw is stripping it (parent class handles this) and that your Markdown file has correct front matter delimiters.
+- **Front matter leaks into HTML:** confirm Docara is stripping it (parent class handles this) and that your Markdown file has correct front matter delimiters.
 - **Build fails with `CommonMarkException`:** inspect the content for invalid HTML/Markdown, or temporarily remove custom extensions to isolate the cause.
 
 ---

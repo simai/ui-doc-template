@@ -7,7 +7,7 @@ description: Blade Templates & Partials
 
 # Blade Templates & Partials
 
-One of the biggest benefits of a templating language is the ability to create reusable layouts and partials. Jigsaw
+One of the biggest benefits of a templating language is the ability to create reusable layouts and partials. Docara
 gives you access to all the templating features and control structures of Blade that are available in Laravel (learn
 more about Blade layouts in the official Blade documentation).
 
@@ -38,7 +38,7 @@ A basic master layout could look like this:
 </html>
 ```
 
-Jigsaw provides a `/source/_core/_layouts` directory out of the box with a basic master layout.
+Docara provides a `/source/_core/_layouts` directory out of the box with a basic master layout.
 
 ## Extending a Layout
 
@@ -108,7 +108,7 @@ That data is then available in your partial as a normal variable:
 
 ## Components
 
-Jigsaw supports both class based and anonymous Blade components.
+Docara supports both class based and anonymous Blade components.
 
 To display a component, you may use a Blade component tag within one of your Blade templates. Blade component tags start
 with the string x- followed by the kebab case name of the component class:

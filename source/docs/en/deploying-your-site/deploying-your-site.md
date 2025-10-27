@@ -7,14 +7,14 @@ description: Deploying Your Site
 
 # Deploying Your Site
 
-Since Jigsaw sites are just static HTML and Javascript, they are simple and cheap to deploy and host.
+Since Docara sites are just static HTML and Javascript, they are simple and cheap to deploy and host.
 
 ## Using GitHub Pages
 
 GitHub Pages is a free service for hosting static sites offered by GitHub. To get started, first read through the
 documentation to get an understanding of how the service works.
 
-The approach we use at Tighten for deploying Jigsaw sites to GitHub pages looks like this:
+The approach we use at Tighten for deploying Docara sites to GitHub pages looks like this:
 
 1. Build your site for production
     ```bash 
@@ -49,7 +49,7 @@ You can skip the build and deploy settings because Netlify will read the `netlif
 Amazon S3 is a very affordable service for hosting static assets. You might have used it in the past for hosting things
 like images, user uploads, or PDFs in your web applications.
 
-What you might not have known is that Amazon S3 also has first class support for hosting static sites, like your Jigsaw
+What you might not have known is that Amazon S3 also has first class support for hosting static sites, like your Docara
 projects.
 
 To deploy a site to S3, first build your site for production:
@@ -75,11 +75,11 @@ This will build your site and start the server automatically.
 Finally, add both the PHP and NodeJS buildpacks in the Processes section of your Kinsta dashboard.
 
 ## Manually
-If you have an existing server that you’d like to use to host your Jigsaw site, all you need to do is get the contents
+If you have an existing server that you’d like to use to host your Docara site, all you need to do is get the contents
 `build_production` into a public folder that’s pointed at by the URL you’d like to use.
 
 ## Changing the Source and Destination Directories
-Jigsaw will look for your source files in a `source` directory, and will output your files to a directory named `build_`
+Docara will look for your source files in a `source` directory, and will output your files to a directory named `build_`
 followed by the environment you specified in the `build` command (`build_local` by default, or `build_staging`,
 `build_production`, etc.). You can, however, customize these locations by adding a `build` key to the array in `config.php`,
 and specifying your own source and/or destination paths.
@@ -123,7 +123,7 @@ return [
 ];
 ```
 
-In this example, running `NODE_ENV=staging npm run build` would output your built files to `dist/staging/public`. Jigsaw will create any directories that do not already exist.
+In this example, running `NODE_ENV=staging npm run build` would output your built files to `dist/staging/public`. Docara will create any directories that do not already exist.
 
 You can also assign different source and build paths for different environments by using multiple environment-specific config files.
 

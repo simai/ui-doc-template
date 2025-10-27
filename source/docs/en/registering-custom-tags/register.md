@@ -7,7 +7,7 @@ description: Register Custom Tags
 
 # Registering Custom Tags
 
-This page walks you through adding a new custom Markdown tag to the project and making it available to the Jigsaw build.
+This page walks you through adding a new custom Markdown tag to the project and making it available to the Docara build.
 
 ---
 

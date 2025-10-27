@@ -199,7 +199,7 @@ All three flows (front matter, `.lang.php`, `.settings.php`) use the same cache 
 
 ## Incremental updates & guards
 - **Per‑file hash**: `hashData[$lang][$filePath] = md5(file)` — unchanged files are skipped on subsequent runs.
-- **Duplicate language guard**: if a target `lang` is already present in Jigsaw `locales`, `translateFiles()` throws:
+- **Duplicate language guard**: if a target `lang` is already present in Docara `locales`, `translateFiles()` throws:
 ```php
 if (in_array($lang, array_keys($this->usedLocales), true)) {
     throw new Exception('Language "' . $lang . '" is already translated.');

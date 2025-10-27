@@ -47,7 +47,7 @@ This means the paths you use in your original files for these assets remain unch
 ## Environments
 Often you might want to use different site variables in your development and production environments. For example, in production you might want to render your Google Analytics tracking snippet, but not include it in development so you don’t skew your results.
 
-Jigsaw makes this simple by allowing you to create additional config.php files for your different environments.
+Docara makes this simple by allowing you to create additional config.php files for your different environments.
 
 Say your base config.php file looks like this:
 ```php

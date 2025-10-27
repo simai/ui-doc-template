@@ -15,7 +15,7 @@ with words separated by dashes. So the default path for a file named My `First B
 `posts`
 would be `/posts/my-first-blog-post`.
 
-Jigsaw gives you the ability to customize your collection paths, however, by adding a `path` key to your collection
+Docara gives you the ability to customize your collection paths, however, by adding a `path` key to your collection
 array.
 
 ## Custom Path Shorthand
@@ -46,7 +46,7 @@ prepend a separator to the variable name:
 
 If you included a date as a variable in your collection items (in YYYY-MM-DD format), you can control the formatting of
 that date in your path by following the variable name with a pipe and using PHP date formatting codes. For any `/`s in
-your date formatting code, Jigsaw will create subdirectories as needed:
+your date formatting code, Docara will create subdirectories as needed:
 
 ```php 
 'path' => '{collection}/{published|Y-m-d}/{-title}' // 'posts/2017-03-27/title-of-first-post'
