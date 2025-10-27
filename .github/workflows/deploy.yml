@@ -25,11 +25,11 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
           cache: "yarn"
 
       - name: Install JavaScript dependencies
-        run: yarn install
+        run: YARN_IGNORE_ENGINES=1 yarn install
 
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist
@@ -51,8 +51,9 @@ jobs:
             set -e
             cd /var/www/dev/data/git/ui-doc-template
             git pull --ff-only origin main
+            export YARN_IGNORE_ENGINES=1
             yarn install
             composer install --no-dev --prefer-dist --no-interaction
             yarn prod
             ./vendor/bin/jigsaw build production
-            rsync -av --delete /var/www/dev/data/git/ui-doc-template/build_production/ /var/www/dev/data/www/doc.simai.io/
+            rsync -av --delete /var/www/dev/data/git/ui-doc-template/build_production/ /var/www/dev/data/www/ui.simai.io/
