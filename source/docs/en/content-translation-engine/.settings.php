@@ -1,13 +1,14 @@
 <?php
-    return [
-        'title' => 'Content Translation Engine',
-        'order' => 15,
-        'menu' => [
-            'configuration' => 'Configuration',
-            'cli-and-workflow' => 'CLI & Workflow',
-            'azure-provider-and-rate-limiting' => 'Azure Provider & Rate Limiting',
-            'markdown‑aware-translation' => 'Markdown‑aware Translation',
-            'front-matter-and-language-packs' => 'Front Matter & PHP Language Packs',
-            'build-integration-and-locales-merge' => 'Build Integration & Locales Merge',
-        ]
-    ];
+return array (
+  'title' => 'Движок перевода контента',
+  'order' => 15,
+  'menu' => 
+  array (
+    'configuration' => 'Конфигурация',
+    'cli-and-workflow' => 'CLI и рабочий процесс',
+    'azure-provider-and-rate-limiting' => 'Поставщик Azure и ограничение скорости',
+    'markdown‑aware-translation' => 'Перевод с учетом Markdown',
+    'front-matter-and-language-packs' => 'Языковые пакеты Front Matter и PHP',
+    'build-integration-and-locales-merge' => 'Интеграция сборки и слияние локалей',
+  ),
+);

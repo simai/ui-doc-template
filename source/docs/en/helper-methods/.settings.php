@@ -1,6 +1,5 @@
 <?php
-    return [
-        'title' => 'Helper Methods',
-        'order' => 7,
-
-    ];
+return array (
+  'title' => 'Вспомогательные методы',
+  'order' => 7,
+);

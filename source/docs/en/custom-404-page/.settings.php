@@ -1,6 +1,5 @@
 <?php
-    return [
-            'title' => 'Custom 404 Page',
-            'order' => 11,
-    ];
-
+return array (
+  'title' => 'Пользовательская страница 404',
+  'order' => 11,
+);

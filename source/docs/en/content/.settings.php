@@ -1,10 +1,11 @@
 <?php
-    return [
-        'title' => 'Creating Your Site’s Content',
-        'order' => 5,
-        'menu' => [
-            'content-blade' => 'Blade Templates & Partials',
-            'content-markdown' => 'Markdown',
-            'content-other-file-types' => 'Other File Types',
-        ]
-    ];
+return array (
+  'title' => 'Создание контента для вашего сайта',
+  'order' => 5,
+  'menu' => 
+  array (
+    'content-blade' => 'Шаблоны и частичные лезвия',
+    'content-markdown' => 'Уценка',
+    'content-other-file-types' => 'Другие типы файлов',
+  ),
+);

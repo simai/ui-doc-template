@@ -1,6 +1,5 @@
 <?php
-    return [
-        'title' => 'Local Development',
-        'order' => 2,
-
-    ];
+return array (
+  'title' => 'Местное развитие',
+  'order' => 2,
+);

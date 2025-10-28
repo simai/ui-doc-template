@@ -1,6 +1,5 @@
 <?php
-    return [
-        'title' => 'Event Listeners',
-        'order' => 12,
-    ];
-
+return array (
+  'title' => 'Прослушиватели событий',
+  'order' => 12,
+);

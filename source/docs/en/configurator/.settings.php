@@ -1,5 +1,5 @@
 <?php
-    return [
-        'title' => 'Configurator',
-        'order' => 16,
-    ];
+return array (
+  'title' => 'Конфигуратор',
+  'order' => 16,
+);

@@ -1,6 +1,6 @@
 <?php
-    return [
-        'title' => 'Installation',
-        'showInMenu' => false,
-        'order' => 1
-    ];
+return array (
+  'title' => 'Установка',
+  'showInMenu' => false,
+  'order' => 1,
+);

@@ -1,25 +1,25 @@
 ---
 extends: _core._layouts.documentation
 section: content
-title: Filtering
-description: Filtering
+title: Фильтрация
+description: Фильтрация
 ---
 
-# Filtering
+# Фильтрация
 
-You can filter collection items by adding a `filter` key to the collection’s array in `config.php`, and specifying a
-callable that accepts the collection item and returns a boolean. Items that return `false` from the filter will not be
-built.
+Вы можете отфильтровать элементы коллекции, добавив тег `filter` ключ к массиву коллекции в `config.php`и указав параметр
+callable, который принимает элемент коллекции и возвращает логическое значение. Возвращаемые товары `false` от фильтра не будет
+Построен.
 
-A common use for filtering is to mark some blog posts as `published`, using a variable in the YAML front matter of each
-collection item that specifies a boolean or a date. Using a filter in `config.production.php`, draft posts can be made
-visible in the local or staging environments, but omitted from your production build.
+Обычно фильтрация используется для того, чтобы пометить некоторые записи в блоге как `published`, используя переменную в переднем веществе YAML каждого
+Элемент коллекции, указывающий логическое значение или дату. Использование фильтра в `config.production.php`, можно делать черновые посты
+Отображается в локальной или промежуточной среде, но отсутствует в рабочей сборке.
 
-> Note that by default, variables from environment-specific config files are not merged recursively; only the top-level
-> keys are considered for merging. For collections, you can override this behavior by setting `merge_collection_configs`
-> to
-> true in your main `config.php` file. This will allow you to only specify the environment-specific changes to your
-`collections` settings.
+> Обратите внимание, что по умолчанию переменные из конфигурационных файлов, специфичных для среды, не объединяются рекурсивно; только верхний уровень
+> Ключи рассматриваются для объединения. Для коллекций это поведение можно переопределить, установив параметр `merge_collection_configs`
+> Кому
+> правда в вашем основном `config.php` файл. Это позволит вам указывать только изменения, специфичные для среды, в вашем
+`collections` Параметры.
 
 > config.php
 
