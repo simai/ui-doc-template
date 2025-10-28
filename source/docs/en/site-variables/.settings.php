@@ -1,5 +1,6 @@
 <?php
-return array (
-  'title' => 'Вариативный сайт',
-  'order' => 6,
-);
+    return [
+        'title' => 'Site Variables',
+        'order' => 6,
+
+    ];

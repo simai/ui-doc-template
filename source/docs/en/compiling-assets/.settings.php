@@ -1,5 +1,6 @@
 <?php
-return array (
-  'title' => 'Компиляция активов',
-  'order' => 4,
-);
+    return [
+        'title' => 'Compiling Assets',
+        'order' => 4,
+
+    ];

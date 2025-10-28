@@ -1,5 +1,6 @@
 <?php
-return array (
-  'title' => 'Красивые URL-адреса',
-  'order' => 10,
-);
+    return [
+        'title' => 'Pretty URLs',
+        'order' => 10,
+
+    ];

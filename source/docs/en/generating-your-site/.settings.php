@@ -1,5 +1,6 @@
 <?php
-return array (
-  'title' => 'Создание вашего сайта',
-  'order' => 3,
-);
+    return [
+        'title' => 'Generating Your Site',
+        'order' => 3,
+
+    ];

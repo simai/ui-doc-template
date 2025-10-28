@@ -1,5 +1,6 @@
 <?php
-return array (
-  'title' => 'Метаданные страницы',
-  'order' => 8,
-);
+    return [
+        'title' => 'Page Metadata',
+        'order' => 8,
+
+    ];
