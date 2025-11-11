@@ -19,6 +19,7 @@
         'env' => getenv(),
         'category' => false,
         'cache' => false,
+        'cachePath' => $projectRoot . '/.cache',
         'siteName' => 'Simai Documentation',
         'siteDescription' => 'Simai framework documentation',
         'github' => 'https://github.com/simai/ui-doc-template/',
